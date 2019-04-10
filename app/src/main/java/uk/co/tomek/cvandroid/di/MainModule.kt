@@ -7,11 +7,22 @@ import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import uk.co.tomek.cvandroid.data.model.CvModelData
 import uk.co.tomek.cvandroid.data.net.NetworkService
+import uk.co.tomek.cvandroid.data.repository.CvRepository
+import uk.co.tomek.cvandroid.data.repository.Repository
 
 /**
  * KOIN modules declarations.
  */
+val applicationModule: Module = module {
+    factory<Repository<CvModelData>> {
+        CvRepository(
+            get()
+        )
+    }
+}
+
 val networkModule: Module = module {
     single { createOkHttpClient() }
     single {

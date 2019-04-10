@@ -6,6 +6,7 @@ import com.squareup.leakcanary.AndroidExcludedRefs
 import com.squareup.leakcanary.LeakCanary
 import org.koin.android.ext.android.startKoin
 import timber.log.Timber
+import uk.co.tomek.cvandroid.di.applicationModule
 import uk.co.tomek.cvandroid.di.networkModule
 
 class CvApp : Application() {
@@ -20,7 +21,7 @@ class CvApp : Application() {
         }
 
         startKoin(this, listOf(
-            //applicationModule,
+            applicationModule,
             networkModule
         ))
     }
