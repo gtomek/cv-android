@@ -1,4 +1,4 @@
-package uk.co.tomek.cvandroid
+package uk.co.tomek.cvandroid.presentation
 
 import android.os.Bundle
 import android.view.Menu
@@ -6,8 +6,13 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import uk.co.tomek.cvandroid.R
+import uk.co.tomek.cvandroid.presentation.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -3,6 +3,7 @@ package uk.co.tomek.cvandroid.di
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
@@ -14,6 +15,7 @@ import uk.co.tomek.cvandroid.data.repository.Repository
 import uk.co.tomek.cvandroid.domain.CvDataMapper
 import uk.co.tomek.cvandroid.domain.CvInteractor
 import uk.co.tomek.cvandroid.domain.Interactor
+import uk.co.tomek.cvandroid.presentation.viewmodel.MainViewModel
 import uk.co.tomek.cvandroid.presentation.viewstate.MainViewState
 
 /**
@@ -32,6 +34,7 @@ val applicationModule: Module = module {
         )
     }
     single { CvDataMapper() }
+    viewModel { MainViewModel(get()) }
 }
 
 val networkModule: Module = module {
