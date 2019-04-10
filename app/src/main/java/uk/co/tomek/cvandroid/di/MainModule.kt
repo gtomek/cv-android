@@ -11,6 +11,10 @@ import uk.co.tomek.cvandroid.data.model.CvModelData
 import uk.co.tomek.cvandroid.data.net.NetworkService
 import uk.co.tomek.cvandroid.data.repository.CvRepository
 import uk.co.tomek.cvandroid.data.repository.Repository
+import uk.co.tomek.cvandroid.domain.CvDataMapper
+import uk.co.tomek.cvandroid.domain.CvInteractor
+import uk.co.tomek.cvandroid.domain.Interactor
+import uk.co.tomek.cvandroid.presentation.viewstate.MainViewState
 
 /**
  * KOIN modules declarations.
@@ -21,6 +25,13 @@ val applicationModule: Module = module {
             get()
         )
     }
+    factory<Interactor<MainViewState>> {
+        CvInteractor(
+            get(),
+            get()
+        )
+    }
+    single { CvDataMapper() }
 }
 
 val networkModule: Module = module {
