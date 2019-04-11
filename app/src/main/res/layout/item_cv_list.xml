@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          android:layout_width="match_parent"
-          android:layout_margin="@dimen/gap_small" android:layout_height="wrap_content"
-          tools:text="My very difficult experience description"/>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:foreground="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/gap_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+            android:id="@+id/imageview_logo"
+            android:layout_width="@dimen/gap_very_large"
+            android:layout_height="@dimen/gap_very_large"
+            android:layout_margin="@dimen/gap_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" tools:ignore="ContentDescription"/>
+
+    <TextView
+            android:id="@+id/textview_institution_name"
+            android:layout_width="0dp"
+            android:layout_margin="@dimen/gap_small"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/imageview_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textStyle="bold"
+            tools:text="Google Inc"/>
+
+    <TextView
+            android:id="@+id/textview_job_title"
+            android:layout_width="0dp"
+            android:layout_margin="@dimen/gap_small"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/gap_small"
+            app:layout_constraintStart_toEndOf="@id/imageview_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_institution_name"
+            android:textStyle="italic"
+            tools:text="Senior Engineer"/>
+
+    <TextView
+            android:id="@+id/textview_description"
+            android:layout_width="0dp"
+            android:layout_margin="@dimen/gap_small"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/gap_small"
+            app:layout_constraintStart_toEndOf="@id/imageview_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_job_title"
+            tools:text="A very long desription asdasdasd asd a sdas dasd a sda asd"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

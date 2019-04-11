@@ -29,13 +29,18 @@ class CvDataMapper {
 
     private fun mapExperienceData(experience: List<Experience>): List<ExperienceModel> {
         return experience.map { item ->
-            ExperienceModel(item.description,
-                outputDateFormat.format(inputDateFormat.parse(item.endDate)),
-                item.jobTitle,
-                item.location,
-                item.logoUrl,
-                item.organization,
-                outputDateFormat.format(inputDateFormat.parse(item.startDate))
+            ExperienceModel(
+                description = item.description,
+                formattedEndDate = if (item.endDate.isNotBlank()) {
+                    outputDateFormat.format(inputDateFormat.parse(item.endDate))
+                } else {
+                    ""
+                },
+                jobTitle = item.jobTitle,
+                location = item.location,
+                logoUrl = item.logoUrl,
+                organization = item.organization,
+                formattedStartDate = outputDateFormat.format(inputDateFormat.parse(item.startDate))
             )
         }
 

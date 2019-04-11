@@ -1,17 +1,14 @@
 package uk.co.tomek.cvandroid.presentation
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_scrolling.*
+import kotlinx.android.synthetic.main.item_cv_list.*
 import kotlinx.android.synthetic.main.layout_error.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -56,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                 progress_bar.visibility = View.VISIBLE
             }
             is MainViewState.Data -> {
+                toolbar_layout.title = state.itemsResponse.name
                 recycler_items_list.visibility = View.VISIBLE
                 progress_bar.visibility = View.GONE
                 layout_error_main.visibility = View.GONE
