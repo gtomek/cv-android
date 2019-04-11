@@ -65,4 +65,4 @@ inline fun <reified T> creteNetService(httpClient: OkHttpClient, baseUrl: String
     return retrofit.create(T::class.java)
 }
 
-const val SERVER_URL = "https://gist.githubusercontent.com/gtomek/6374e18a38b1ff3dd01f04e40795a20d/raw/16936182fd0d5669825cbfe18f26b80d388771ea" //cvdata.json
+const val SERVER_URL = "https://gist.githubusercontent.com/gtomek/6374e18a38b1ff3dd01f04e40795a20d/raw/16936182fd0d5669825cbfe18f26b80d388771ea/" //cvdata.json

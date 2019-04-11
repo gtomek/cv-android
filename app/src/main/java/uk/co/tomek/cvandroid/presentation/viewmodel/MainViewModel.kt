@@ -14,7 +14,7 @@ import uk.co.tomek.cvandroid.presentation.viewstate.MainViewState
  */
 class MainViewModel(private val mainInteractor: Interactor<MainViewState>) : ViewModel() {
 
-    private val mainLiveData = MutableLiveData<MainViewState>()
+    val mainLiveData = MutableLiveData<MainViewState>()
 
     private val parentJob = Job()
 
@@ -27,5 +27,10 @@ class MainViewModel(private val mainInteractor: Interactor<MainViewState>) : Vie
             val mainViewState = mainInteractor.fetchData()
             mainLiveData.postValue(mainViewState)
         }
+    }
+
+    fun retryButtonClicked() {
+        mainLiveData.value = MainViewState.Loading
+        fetchData()
     }
 }

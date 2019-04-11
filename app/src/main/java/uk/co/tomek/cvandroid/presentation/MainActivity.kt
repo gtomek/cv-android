@@ -1,43 +1,82 @@
 package uk.co.tomek.cvandroid.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_scrolling.*
+import kotlinx.android.synthetic.main.layout_error.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 import uk.co.tomek.cvandroid.R
+import uk.co.tomek.cvandroid.domain.model.ExperienceModel
 import uk.co.tomek.cvandroid.presentation.viewmodel.MainViewModel
+import uk.co.tomek.cvandroid.presentation.viewstate.MainViewState
 
 class MainActivity : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModel()
 
+    private lateinit var experienceListAdapter: ExperienceListAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+
+        experienceListAdapter = ExperienceListAdapter(Glide.with(this), ::openDetails)
+
+        recycler_items_list.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = experienceListAdapter
+        }
+
+        button_error_layout_try_again.setOnClickListener {
+            mainViewModel.retryButtonClicked()
+        }
+
+        mainViewModel.mainLiveData.observe(this, Observer { viewState ->
+            viewState?.let { renderState(it) }
+        })
+    }
+
+    private fun renderState(state: MainViewState) {
+        Timber.v("Render state ${state::class.java}, thread: ${Thread.currentThread().name}")
+        when (state) {
+            is MainViewState.Loading -> {
+                recycler_items_list.visibility = View.GONE
+                layout_error_main.visibility = View.GONE
+                progress_bar.visibility = View.VISIBLE
+            }
+            is MainViewState.Data -> {
+                recycler_items_list.visibility = View.VISIBLE
+                progress_bar.visibility = View.GONE
+                layout_error_main.visibility = View.GONE
+                state.itemsResponse.let {
+                    experienceListAdapter.submitList(state.itemsResponse.experience)
+                }
+                if (state.itemsResponse.experience.isEmpty()) {
+                    //TODO:DisplayEmptyState
+                }
+            }
+            is MainViewState.Error -> {
+                recycler_items_list.visibility = View.GONE
+                progress_bar.visibility = View.GONE
+                layout_error_main.visibility = View.VISIBLE
+                Timber.e(state.throwable)
+            }
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_scrolling, menu)
-        return true
+    private fun openDetails(experienceModel: ExperienceModel) {
+        //TODO:
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }
