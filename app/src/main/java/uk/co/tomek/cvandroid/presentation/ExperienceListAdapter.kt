@@ -33,7 +33,7 @@ class ExperienceListAdapter(
         if (position == 0) {
             (holder as HeaderViewHolder).bind(summary, knowledgeTopics)
         } else {
-            (holder as ExperienceItemViewHolder).bind(getItem(position), clickListener)
+            (holder as ExperienceItemViewHolder).bind(getItem(position - 1), clickListener)
         }
     }
 
@@ -43,6 +43,10 @@ class ExperienceListAdapter(
         } else {
             R.layout.item_cv_list
         }
+    }
+
+    override fun getItemCount(): Int {
+        return super.getItemCount() + 1 // +1 for the header
     }
 
     fun updateSummary(summary: String, knowledgeTopics: List<String>) {
