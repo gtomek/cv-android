@@ -57,8 +57,9 @@ class MainActivity : AppCompatActivity() {
                 recycler_items_list.visibility = View.VISIBLE
                 progress_bar.visibility = View.GONE
                 layout_error_main.visibility = View.GONE
-                state.itemsResponse.let {
-                    experienceListAdapter.submitList(state.itemsResponse.experience)
+                state.itemsResponse.let { cvModel ->
+                    experienceListAdapter.updateSummary(cvModel.summary, cvModel.knowledgeTopics)
+                    experienceListAdapter.submitList(cvModel.experience)
                 }
                 if (state.itemsResponse.experience.isEmpty()) {
                     //TODO:DisplayEmptyState

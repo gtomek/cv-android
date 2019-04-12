@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:foreground="?selectableItemBackground"
+        android:background="?selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
         android:padding="@dimen/gap_small"
