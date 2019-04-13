@@ -1,6 +1,8 @@
 {
   "name": "Tomasz",
   "nationality": "British",
+  "phone": "+447963049108",
+  "email": "tom@gmail.com",
   "summary": "Talented Lead Android Developer with a proven track record of implementation and leading the development of innovative applications. As a developer, I love clean, self-explanatory code, UI design following platform specific guidelines and providing a smooth user experience. I follow the development of new technologies and regularly participate in local technology meet-ups.",
   "knowledgeTopics": [
     "Android",

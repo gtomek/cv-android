@@ -10,5 +10,6 @@ data class CvModel(
     val knowledgeTopics: List<String>,
     val name: String,
     val nationality: String,
+    val phone: String,
     val summary: String
 )

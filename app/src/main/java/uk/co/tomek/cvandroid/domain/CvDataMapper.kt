@@ -23,6 +23,7 @@ class CvDataMapper {
             receivedCvModelData.knowledgeTopics,
             receivedCvModelData.name,
             receivedCvModelData.nationality,
+            receivedCvModelData.phone,
             receivedCvModelData.summary
         )
     }

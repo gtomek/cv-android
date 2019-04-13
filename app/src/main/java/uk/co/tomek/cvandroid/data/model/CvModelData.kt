@@ -5,5 +5,7 @@ data class CvModelData(
     val knowledgeTopics: List<String>,
     val name: String,
     val nationality: String,
+    val phone: String,
+    val email: String,
     val summary: String
 )

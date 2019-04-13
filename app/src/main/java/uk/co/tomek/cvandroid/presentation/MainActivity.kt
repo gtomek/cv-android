@@ -2,13 +2,13 @@ package uk.co.tomek.cvandroid.presentation
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_scrolling.*
-import kotlinx.android.synthetic.main.item_cv_list.*
 import kotlinx.android.synthetic.main.layout_error.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openDetails(experienceModel: ExperienceModel) {
-        //TODO:
+        Toast.makeText(this, R.string.experience_item_clicked, Toast.LENGTH_LONG).show()
     }
 
 }
