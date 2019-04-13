@@ -30,6 +30,8 @@ class CvDataMapperTest {
         val location = "City,Country"
         val logoUrl = "http://"
         val organisation = "org"
+        val phone = "+4445454546"
+        val email = "test@email.com"
         val experience1 = Experience(
             description,
             endDate,
@@ -49,6 +51,8 @@ class CvDataMapperTest {
             knowledgeTopics,
             name,
             nationality,
+            phone,
+            email,
             summary
         )
         val experience1Processed = ExperienceModel(
@@ -63,7 +67,7 @@ class CvDataMapperTest {
         val expectedResult = CvModel(
             listOf(experience1Processed),
             knowledgeTopics,
-            name, nationality, summary
+            name, nationality, phone, summary
         )
 
         // when
