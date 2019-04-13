@@ -18,7 +18,6 @@ import uk.co.tomek.cvandroid.domain.model.ExperienceModel
 import uk.co.tomek.cvandroid.presentation.viewmodel.MainViewModel
 import uk.co.tomek.cvandroid.presentation.viewstate.MainViewState
 
-
 class MainActivity : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModel()
