@@ -1,5 +1,7 @@
 package uk.co.tomek.cvandroid.presentation
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,10 +14,10 @@ import kotlinx.android.synthetic.main.content_scrolling.*
 import kotlinx.android.synthetic.main.layout_error.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
-import uk.co.tomek.cvandroid.R
 import uk.co.tomek.cvandroid.domain.model.ExperienceModel
 import uk.co.tomek.cvandroid.presentation.viewmodel.MainViewModel
 import uk.co.tomek.cvandroid.presentation.viewstate.MainViewState
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(uk.co.tomek.cvandroid.R.layout.activity_main)
         setSupportActionBar(toolbar)
 
         experienceListAdapter = ExperienceListAdapter(Glide.with(this), ::openDetails)
@@ -57,6 +59,10 @@ class MainActivity : AppCompatActivity() {
                 recycler_items_list.visibility = View.VISIBLE
                 progress_bar.visibility = View.GONE
                 layout_error_main.visibility = View.GONE
+                fab_call.apply {
+                    show()
+                    setOnClickListener { launchDialer(state.itemsResponse.phone) }
+                }
                 state.itemsResponse.let { cvModel ->
                     experienceListAdapter.updateSummary(cvModel.summary, cvModel.knowledgeTopics)
                     experienceListAdapter.submitList(cvModel.experience)
@@ -74,8 +80,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun launchDialer(phone: String) {
+        val intent = Intent(Intent.ACTION_DIAL).apply {
+            data = Uri.parse("tel:$phone")
+        }
+        startActivity(intent)
+    }
+
     private fun openDetails(experienceModel: ExperienceModel) {
-        Toast.makeText(this, R.string.experience_item_clicked, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, uk.co.tomek.cvandroid.R.string.experience_item_clicked, Toast.LENGTH_LONG).show()
     }
 
 }
