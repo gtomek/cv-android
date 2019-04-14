@@ -87,7 +87,7 @@ class CvInteractorTest {
         val result = runBlocking { interactor.fetchData() }
 
         // then
-        Assert.assertEquals(expected, result)
+        assertEquals(expected, result)
     }
 
     @Test
