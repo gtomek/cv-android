@@ -33,4 +33,9 @@ class MainViewModel(private val mainInteractor: Interactor<MainViewState>) : Vie
         mainLiveData.value = MainViewState.Loading
         fetchData()
     }
+
+    override fun onCleared() {
+        parentJob.cancel()
+        super.onCleared()
+    }
 }
